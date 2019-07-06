@@ -19,9 +19,9 @@
 <h4 style="text-align:center">Prix par personne en dollar canadien ($CAD)</h4>
 
 <form>
-    <div class="divNbJours">
-        <label for="nbJours">Quel est la duré du voyage : </label>
-        <input id="nbJours" type="number" min="1" max="365" value="7" style="width:60px"></input> nuits.
+    <div class="divNbJour">
+        <label for="nbJour">Quel est la duré du voyage : </label>
+        <input id="nbJour" type="number" min="1" max="365" value="7" style="width:60px"></input> nuits.
     </div>
     <br />
     <div class="divTypeNuit">
@@ -43,6 +43,18 @@
         <input type="radio" name="typeNourriture" value="3"> Restaurant, parfois kombini*<br />
         <input type="radio" name="typeNourriture" value="4"> Juste restaurant<br />
         <input type="radio" name="typeNourriture" value="5"> Juste restaurant haut de gamme<br />
+
+        <legend style="font-size:13px;margin-top:5px">*Kombini : Supérette servant des repas frais et variés, allant de spaghetti au bento complet, et même au sushi, pour des prix assez bas (7-Eleven, lawson, Family-mart)</legend>
+    </div>
+    <br />
+    <hr />
+    <br />
+    <div class="divTypeTransport">
+        <input type="radio" name="typeTransport" value="1"> Je vais juste marcher<br />
+        <input type="radio" name="typeTransport" value="2" checked> Je vais marché et prendre les transport en commun<br />
+        <input type="radio" name="typeTransport" value="3"> Je vais juste prendre les transports en commun<br />
+        <input type="radio" name="typeTransport" value="4"> Je vais louer une voiture<br />
+        <input type="radio" name="typeTransport" value="5"> Je vais prendre des uber ou taxi<br />
 
         <legend style="font-size:13px;margin-top:5px">*Kombini : Supérette servant des repas frais et variés, allant de spaghetti au bento complet, et même au sushi, pour des prix assez bas (7-Eleven, lawson, Family-mart)</legend>
     </div>
@@ -151,12 +163,13 @@
 <script>
     $('input[type=radio][name=typeNuit]').change(calculNuit);
     $('input[type=radio][name=typeNourriture]').change(calculNourriture);
+    $('input[type=radio][name=typeTransport]').change(calculTransport);
 
     $("#nbPersonne").keyup(calculNuit);
     $("#nbPersonne").change(calculNuit);
 
-    $("#nbJours").keyup(calculSousTotal);
-    $("#nbJours").change(calculSousTotal);
+    $("#nbJour").keyup(calculSousTotal);
+    $("#nbJour").change(calculSousTotal);
     $("#prixNuit").keyup(calculSousTotal);
     $("#prixNuit").change(calculSousTotal);
     $("#prixNourriture").keyup(calculSousTotal);
@@ -169,7 +182,7 @@
     $("#prixAvion").change(calculSousTotal);
 
     function calculSousTotal() {
-        $nbJour = $("#nbJours").val();
+        $nbJour = $("#nbJour").val();
         $prixNuit = $("#prixNuit").val();
         $prixNourriture = $("#prixNourriture").val();
         $prixTransport = $("#prixTransport").val();
@@ -264,6 +277,28 @@
                 break;
             case '5':
                 $("#prixNourriture").val("150");
+                break;
+        }
+        calculSousTotal();
+    }
+
+    function calculTransport() {
+        $choix = $('input[type=radio][name=typeTransport]:checked').val();
+        switch ($choix) {
+            case '1':
+                $("#prixTransport").val("0");
+                break;
+            case '2':
+                $("#prixTransport").val("12");
+                break;
+            case '3':
+                $("#prixTransport").val("20");
+                break;
+            case '4':
+                $("#prixTransport").val("90");
+                break;
+            case '5':
+                $("#prixTransport").val("120");
                 break;
         }
         calculSousTotal();
