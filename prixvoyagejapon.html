@@ -48,6 +48,19 @@
         background: #ffa6a6;
         cursor: pointer;
     }
+
+    #floteurPrix {
+        position: fixed;
+        width: 33%;
+        bottom: 3%;
+        left: 33%;
+        background: #ffc9c9;
+        bottom: 10px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 6px grey;
+        padding: 10px;
+        text-align: center;
+    }
 </style>
 
 <h1 style="text-align:center">Calculateur de prix pour un voyage au japon</h1>
@@ -60,6 +73,7 @@
     </div>
     <br />
     <div class="divTypeNuit">
+        <h3>&#128716; La nuit : </h3>
         <input type="radio" name="typeNuit" value="1"> Camping / Temple / Si c'est gratuit, j'y dors!<br />
         <input type="radio" name="typeNuit" value="2" checked> Airbnb / Auberge de jeunesse<br />
         <input type="radio" name="typeNuit" value="3"> Chambre privé dans un hotel pas trop cher<br />
@@ -73,6 +87,7 @@
     <hr />
     <br />
     <div class="divTypeNourriture">
+        <h3>&#127857; La nourriture : </h3>
         <input type="radio" name="typeNourriture" value="1"> Épicerie seulement<br />
         <input type="radio" name="typeNourriture" value="2" checked> Kombini, parfois épicerie<br />
         <input type="radio" name="typeNourriture" value="3"> Restaurant, parfois kombini<br />
@@ -85,6 +100,7 @@
     <hr />
     <br />
     <div class="divTypeTransport">
+        <h3>&#128646; Les transports : </h3>
         <input type="radio" name="typeTransport" value="1"> Je vais juste marcher<br />
         <input type="radio" name="typeTransport" value="2" checked> Je vais marché et prendre les transport en commun<br />
         <input type="radio" name="typeTransport" value="3"> Je vais juste prendre les transports en commun<br />
@@ -97,8 +113,9 @@
     <hr />
     <br />
     <div class="divTypeVisit">
+        <h3>&#127983; Les visite : </h3>
         <input type="radio" name="typeVisit" value="1"> Si c'est gratuit, où quelque dollars, je suis partant<br />
-        <input type="radio" name="typeVisit" value="2" checked> Payer un peut plus chère pour parfoit visiter de plus gros musé ou des zoo/aquarium<br />
+        <input type="radio" name="typeVisit" value="2" checked> Payer un peut plus chère pour parfoit visiter de plus gros musées ou des zoos/aquariums<br />
         <input type="radio" name="typeVisit" value="3"> Je ne regarde pas les dépensse pour les visite, c'est pour ça que je suis là<br />
 
         <legend style="font-size:13px;margin-top:5px">Truc : Beaucoup de parc, jardins et temple sont gratuit à visiter</legend>
@@ -187,7 +204,15 @@
             </tr>
         </table>
 </form>
-<h3>Version 2.1</h3>
+
+<div id="floteurPrix">
+    <label for="sousTotalFloteur">Prix total sans l'avion : </label>
+    <input id="sousTotalFloteur" type="number" value="469" readonly style="width:80px;background-color: #ffc9c9;border-width:0px;border:none;text-align:right;font-weight:bold;font-size:15px;"></input><b>$</b><br />
+    <label for="totalFloteur">Prix total avec l'avion : </label>
+    <input id="totalFloteur" type="number" value="1969" readonly style="width:80px;background-color: #ffc9c9;border-width:0px;border:none;text-align:right;font-weight:bold;font-size:15px;"></input><b>$</b>
+</div>
+
+<h3>Version 2.5</h3>
 <p>Fait par Nicolas Meunier - 2019</p>
 <p>Prix en $CAD</p>
 
@@ -227,6 +252,7 @@
         $prixVisite = $("#prixVisite").val();
         $sousTotal = ($nbJour * $prixNuit) + ($nbJour * $prixNourriture) + ($nbJour * $prixTransport) + ($nbJour * $prixVisite)
         $("#sousTotal").val($sousTotal);
+        $("#sousTotalFloteur").val($sousTotal);
         calculTotal();
     }
 
@@ -235,6 +261,7 @@
         $prixAvion = $("#prixAvion").val();
         $total = parseInt($sousTotal) + parseInt($prixAvion);
         $("#total").val($total);
+        $("#totalFloteur").val($total);
     }
 
     function calculNuit() {
