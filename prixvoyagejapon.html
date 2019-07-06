@@ -160,6 +160,10 @@
     $("#prixVisite").keyup(calculTotal);
     $("#prixVisite").change(calculSousTotal);
     $("#prixVisite").change(calculTotal);
+    $("#prixAvion").keyup(calculSousTotal);
+    $("#prixAvion").keyup(calculTotal);
+    $("#prixAvion").change(calculSousTotal);
+    $("#prixAvion").change(calculTotal);
 
     function calculSousTotal() {
         $nbJour = $("#nbJours").val();
