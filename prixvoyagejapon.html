@@ -1,0 +1,164 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 98%;
+    }
+
+    td,
+    th {
+        border: 1px solid #942626;
+        text-align: left;
+        padding: 8px;
+    }
+</style>
+
+<h1>Calculateur de prix pour un voyage au japon</h1>
+
+<form>
+    <table style="margin:10px">
+        <tr>
+            <th>Éléments</th>
+            <th>Prix</th>
+            <th>Variation</th>
+        </tr>
+        <tr style="background-color: #ffe8e8;">
+            <td>
+                <label for="nbJours">Nombre de jours</label>
+            </td>
+            <td>
+                <input id="nbJours" type="number" min="1" max="365" value="7" style="width:80px"></input>
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>
+                <label for="prixNuit">Dollars la nuit en moyenne</label>
+            </td>
+            <td>
+                <input id="prixNuit" type="number" min="0" max="1000" value="25" style="width:80px"></input>$
+            </td>
+            <td>
+                10-40$
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="prixNourriture">Nourriture par jour</label>
+            </td>
+            <td>
+                <input id="prixNourriture" type="number" min="0" max="1000" value="12" style="width:80px"></input>$
+            </td>
+            <td>
+                5-100$
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="prixTransport">Transport par jour</label>
+            </td>
+            <td>
+                <input id="prixTransport" type="number" min="0" max="1000" value="15" style="width:80px"></input>$
+            </td>
+            <td>
+                5-20$
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="prixVisite">Visite par jour</label>
+            </td>
+            <td>
+                <input id="prixVisite" type="number" min="0" max="1000" value="15" style="width:80px"></input>$
+            </td>
+            <td>
+                0-40$
+            </td>
+        </tr>
+        <tr>
+            <td>&#160;</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>
+                <label for="sousTotal">Prix par personne sans l'avion</label>
+            </td>
+            <td>
+                <input id="sousTotal" type="number" value="469" readonly style="width:80px;background-color: #ebebeb;"></input>$
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>&#160;</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>
+                <label for="prixAvion">Prix de l'avion</label>
+            </td>
+            <td>
+                <input id="prixAvion" type="number" min="0" max="10000" value="1500" style="width:80px"></input>$
+            </td>
+            <td>
+                1000-2000$
+            </td>
+        </tr>
+        <tr>
+            <td>&#160;</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>
+                <label for="total">Prix total par personne</label>
+            </td>
+            <td>
+                <input id="total" type="number" value="1969" readonly style="width:80px;background-color: #ebebeb;"></input>$
+            </td>
+            <td></td>
+        </tr>
+    </table>
+
+</form>
+<script>
+    $("#nbJours").keyup(calculSousTotal);
+    $("#nbJours").keyup(calculTotal);
+    $("#nbJours").change(calculSousTotal);
+    $("#nbJours").change(calculTotal);
+    $("#prixNuit").keyup(calculSousTotal);
+    $("#prixNuit").keyup(calculTotal);
+    $("#prixNuit").change(calculSousTotal);
+    $("#prixNuit").change(calculTotal);
+    $("#prixNourriture").keyup(calculSousTotal);
+    $("#prixNourriture").keyup(calculTotal);
+    $("#prixNourriture").change(calculSousTotal);
+    $("#prixNourriture").change(calculTotal);
+    $("#prixTransport").keyup(calculSousTotal);
+    $("#prixTransport").keyup(calculTotal);
+    $("#prixTransport").change(calculSousTotal);
+    $("#prixTransport").change(calculTotal);
+    $("#prixVisite").keyup(calculSousTotal);
+    $("#prixVisite").keyup(calculTotal);
+    $("#prixVisite").change(calculSousTotal);
+    $("#prixVisite").change(calculTotal);
+
+    function calculSousTotal() {
+        $nbJour = $("#nbJours").val();
+        $prixNuit = $("#prixNuit").val();
+        $prixNourriture = $("#prixNourriture").val();
+        $prixTransport = $("#prixTransport").val();
+        $prixVisite = $("#prixVisite").val();
+        $sousTotal = ($nbJour * $prixNuit) + ($nbJour * $prixNourriture) + ($nbJour * $prixTransport) + ($nbJour * $prixVisite)
+        $("#sousTotal").val($sousTotal);
+    }
+
+    function calculTotal() {
+        $sousTotal = $("#sousTotal").val();
+        $prixAvion = $("#prixAvion").val();
+        $total = parseInt($sousTotal) + parseInt($prixAvion);
+        $("#total").val($total);
+    }
+</script>
