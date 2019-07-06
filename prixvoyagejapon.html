@@ -4,6 +4,7 @@
         font-family: arial, sans-serif;
         border-collapse: collapse;
         width: 98%;
+        box-shadow: 0px 0px 6px grey;
     }
 
     td,
@@ -17,30 +18,37 @@
 <h1>Calculateur de prix pour un voyage au japon</h1>
 
 <form>
+    <div class="divNbJours">
+        <label for="nbJours">Quel est la duré du voyage : </label>
+        <input id="nbJours" type="number" min="1" max="365" value="7" style="width:60px"></input> nuits.
+    </div>
+    <br />
+    <div class="divTypeNuit">
+        <input type="radio" name="typeNuit" value="1"> Camping / Temple / Si c'est gratuit, j'y dors!<br />
+        <input type="radio" name="typeNuit" value="2" checked> Airbnb / Auberge de jeunesse<br />
+        <input type="radio" name="typeNuit" value="3"> Chambre privé dans un hotel pas trop cher<br />
+        <input type="radio" name="typeNuit" value="4"> Hotel plus haut de gamme<br />
+
+        <br />
+        <label for="nbPersonne">Combien de personne vont partager la chambre : </label>
+        <input id="nbPersonne" type="number" min="1" max="5" value="2" style="width:60px"></input> personnes.
+    </div>
+
+    <br />
     <table style="margin:10px">
         <tr>
             <th>Éléments</th>
             <th>Prix</th>
-            <th>Variation</th>
-        </tr>
-        <tr style="background-color: #ffe8e8;">
-            <td>
-                <label for="nbJours">Nombre de jours</label>
-            </td>
-            <td>
-                <input id="nbJours" type="number" min="1" max="365" value="7" style="width:80px"></input>
-            </td>
-            <td></td>
+            <th style="border-radius: 0px 10px 0px 0px;">Variation</th>
         </tr>
         <tr>
             <td>
                 <label for="prixNuit">Dollars la nuit en moyenne</label>
             </td>
             <td>
-                <input id="prixNuit" type="number" min="0" max="1000" value="25" style="width:80px"></input>$
+                <input id="prixNuit" type="number" min="0" max="1000" value="30" style="width:80px"></input>$
             </td>
             <td>
-                10-40$
             </td>
         </tr>
         <tr>
@@ -122,9 +130,16 @@
         </tr>
     </table>
 </form>
-<h3>Version 1.1</h2>
+<h3>Version 1.5</h3>
 <p>Fait par Nicolas Meunier - 2019</p>
+<p>Prix en $CAD</p>
+
 <script>
+    $('input[type=radio][name=typeNuit]').change(calculNuit);
+
+    $("#nbPersonne").keyup(calculNuit);
+    $("#nbPersonne").change(calculNuit);
+
     $("#nbJours").keyup(calculSousTotal);
     $("#nbJours").keyup(calculTotal);
     $("#nbJours").change(calculSousTotal);
@@ -161,5 +176,65 @@
         $prixAvion = $("#prixAvion").val();
         $total = parseInt($sousTotal) + parseInt($prixAvion);
         $("#total").val($total);
+    }
+
+    function calculNuit() {
+        $choix = $('input[type=radio][name=typeNuit]:checked').val();
+        switch ($choix) {
+            case '1':
+                $("#prixNuit").val("5");
+                break;
+            case '2':
+                switch ($("#nbPersonne").val()) {
+                    case '1':
+                        $("#prixNuit").val("35");
+                        break;
+                    case '2':
+                        $("#prixNuit").val("30");
+                        break;
+                    case '3':
+                    case '4':
+                    case '5':
+                        $("#prixNuit").val("25");
+                        break;
+                    default:
+                        $("#prixNuit").val("25");
+                }
+                break;
+            case '3':
+                switch ($("#nbPersonne").val()) {
+                    case '1':
+                        $("#prixNuit").val("60");
+                        break;
+                    case '2':
+                        $("#prixNuit").val("50");
+                        break;
+                    case '3':
+                    case '4':
+                    case '5':
+                        $("#prixNuit").val("40");
+                        break;
+                    default:
+                        $("#prixNuit").val("40");
+                }
+                break;
+            case '4':
+                switch ($("#nbPersonne").val()) {
+                    case '1':
+                        $("#prixNuit").val("200");
+                        break;
+                    case '2':
+                        $("#prixNuit").val("170");
+                        break;
+                    case '3':
+                    case '4':
+                    case '5':
+                        $("#prixNuit").val("150");
+                        break;
+                    default:
+                        $("#prixNuit").val("150");
+                }
+                break;
+        }
     }
 </script>
