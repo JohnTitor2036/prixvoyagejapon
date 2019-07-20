@@ -1,387 +1,400 @@
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<style>
-    table {
-        font-family: arial, sans-serif;
-        border-collapse: collapse;
-        width: 98%;
-        box-shadow: 0px 0px 6px grey;
-    }
+<!doctype html>
 
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>Calculateur de prix pour un voyage au japon</title>
+  <meta name="description" content="Calculer le coût d'un voyage au japon, selon plusieurs critères">
+  <meta name="author" content="Nicolas Meunier">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <link href="https://u.jimcdn.com/cms/o/sb308cd080d5714fe/userlayout/css/main.css?t=1563524758" rel="stylesheet" type="text/css" id="jimdo_main_css"/>
+  <link href="https://u.jimcdn.com/cms/o/sb308cd080d5714fe/userlayout/css/layout.css?t=1562421176" rel="stylesheet" type="text/css" id="jimdo_layout_css"/>
+  <link href="https://u.jimcdn.com/cms/o/sb308cd080d5714fe/userlayout/css/font.css?t=1563524758" rel="stylesheet" type="text/css" id="jimdo_font_css"/>
+</head>
+<body>
+
+
+<style>
+	table {
+    font-family: arial,
+    sans-serif;
+    border-collapse: collapse;
+    width: 98%;
+    box-shadow: 0px 0px 6px grey;
+
+    }
     td,
     th {
-        border: 1px solid #942626;
-        text-align: left;
-        padding: 8px;
+    	border: 1px solid #942626;
+    	text-align: left;
+    	padding: 8px;
     }
-
     .slidecontainer {
-        width: 100%;
+    	width: 100%;
     }
-
     .slider {
-        -webkit-appearance: none;
-        width: 100%;
-        height: 25px;
-        background: #d3d3d3;
-        outline: none;
-        opacity: 0.7;
-        -webkit-transition: .2s;
-        transition: opacity .2s;
+    	-webkit-appearance: none;
+    	width: 100%;
+    	height: 25px;
+    	background: #d3d3d3;
+    	outline: none;
+    	opacity: 0.7;
+    	-webkit-transition: .2s;
+    	transition: opacity .2s;
     }
-
     .slider:hover {
-        opacity: 1;
+    	opacity: 1;
     }
-
     .slider::-webkit-slider-thumb {
-        -webkit-appearance: none;
-        appearance: none;
-        width: 25px;
-        height: 25px;
-        background: #ffa6a6;
-        cursor: pointer;
+    	-webkit-appearance: none;
+    	appearance: none;
+    	width: 25px;
+    	height: 25px;
+    	background: #ffa6a6;
+    	cursor: pointer;
     }
-
     .slider::-moz-range-thumb {
-        width: 25px;
-        height: 25px;
-        background: #ffa6a6;
-        cursor: pointer;
+    	width: 25px;
+    	height: 25px;
+    	background: #ffa6a6;
+    	cursor: pointer;
     }
-
     #floteurPrix {
-        position: fixed;
-        width: 33%;
-        bottom: 3%;
-        left: 33%;
-        background: #ffc9c9;
-        bottom: 10px;
-        border-radius: 10px;
-        box-shadow: 0px 0px 6px grey;
-        padding: 10px;
-        text-align: center;
+    	position: fixed;
+    	width: 33%;
+    	left: 33%;
+    	background: #ffc9c9;
+    	bottom: 10px;
+    	border-radius: 10px;
+    	box-shadow: 0px 0px 6px grey;
+    	padding: 10px;
+    	text-align: center;
     }
 </style>
-
 <h1 style="text-align:center">Calculateur de prix pour un voyage au japon</h1>
+<h2 style="text-align:center">Version Beta (peut contenir des bugs et n'est pas fait pour mobile)</h2>
+<p style="text-align:center"><a href="https://prixvoyagejapon.jimdofree.com/">Cliquez ici pour revenir &agrave; la version standard</a></p>
 <h4 style="text-align:center">Prix par personne en dollar canadien ($CAD)</h4>
-
 <form>
-    <div class="divNbJour">
-        <label for="nbJour">Quel est la duré du voyage : </label>
-        <input id="nbJour" type="number" min="1" max="365" value="7" style="width:60px"></input> nuits.
-    </div>
-    <br />
-    <div class="divTypeNuit">
-        <h3>&#128716; La nuit : </h3>
-        <input type="radio" name="typeNuit" value="1"> Camping / Temple / Si c'est gratuit, j'y dors!<br />
-        <input type="radio" name="typeNuit" value="2" checked> Airbnb / Auberge de jeunesse<br />
-        <input type="radio" name="typeNuit" value="3"> Chambre privé dans un hotel pas trop cher<br />
-        <input type="radio" name="typeNuit" value="4"> Hotel plus haut de gamme<br />
-
-        <br />
-        <label for="nbPersonne">Combien de personne vont partager la chambre : </label>
-        <input id="nbPersonne" type="number" min="1" max="5" value="2" style="width:60px"></input> personnes. (Entre 1 et 5 personnes)
-    </div>
-    <br />
-    <hr />
-    <br />
-    <div class="divTypeNourriture">
-        <h3>&#127857; La nourriture : </h3>
-        <input type="radio" name="typeNourriture" value="1"> Épicerie seulement<br />
-        <input type="radio" name="typeNourriture" value="2" checked> Kombini, parfois épicerie<br />
-        <input type="radio" name="typeNourriture" value="3"> Restaurant, parfois kombini<br />
-        <input type="radio" name="typeNourriture" value="4"> Juste restaurant<br />
-        <input type="radio" name="typeNourriture" value="5"> Juste restaurant haut de gamme<br />
-
-        <legend style="font-size:13px;margin-top:5px">Truc : Les kombini sont des supérettes servant des repas frais et variés, allant de spaghetti au bento complet, et même au sushi, pour des prix assez bas (7-Eleven, Lawson, Family-Mart)</legend>
-    </div>
-    <br />
-    <hr />
-    <br />
-    <div class="divTypeTransport">
-        <h3>&#128646; Les transports : </h3>
-        <input type="radio" name="typeTransport" value="1"> Je vais juste marcher<br />
-        <input type="radio" name="typeTransport" value="2" checked> Je vais marché et prendre les transport en commun<br />
-        <input type="radio" name="typeTransport" value="3"> Je vais juste prendre les transports en commun<br />
-        <input type="radio" name="typeTransport" value="4"> Je vais louer une voiture<br />
-        <input type="radio" name="typeTransport" value="5"> Je vais prendre des uber ou taxi<br />
-
-        <legend style="font-size:13px;margin-top:5px">Truc : Les transports en commun sont très répandus, fiables et variés (train, métro, tramway, bus, etc.)</legend>
-    </div>
-    <br />
-    <hr />
-    <br />
-    <div class="divTypeVisit">
-        <h3>&#127983; Les visite : </h3>
-        <input type="radio" name="typeVisit" value="1"> Si c'est gratuit, où quelque dollars, je suis partant<br />
-        <input type="radio" name="typeVisit" value="2" checked> Payer un peut plus chère pour parfoit visiter de plus gros musées ou des zoos/aquariums<br />
-        <input type="radio" name="typeVisit" value="3"> Je ne regarde pas les dépensse pour les visite, c'est pour ça que je suis là<br />
-
-        <legend style="font-size:13px;margin-top:5px">Truc : Beaucoup de parc, jardins et temple sont gratuit à visiter</legend>
-    </div>
-    <br />
-    <hr />
-    <br />
-    <div class="divTypeVisit">
-        <label for="sliderPrixAvion">Prix pour le billet d'avion : </label>
-        <input id="sliderPrixAvion" type="range" min="500" max="3000" value="1500" class="slider" style="width:70%">
-        <br />
-        <hr />
-        <br />
-        <table style="margin:10px">
-            <tr>
-                <th>Éléments</th>
-                <th>Prix</th>
-            </tr>
-            <tr>
-                <td>
-                    <label for="prixNuit">Dollars la nuit en moyenne</label>
-                </td>
-                <td>
-                    <input id="prixNuit" type="number" min="0" max="1000" value="30" style="width:80px"></input>$
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="prixNourriture">Nourriture par jour</label>
-                </td>
-                <td>
-                    <input id="prixNourriture" type="number" min="0" max="1000" value="15" style="width:80px"></input>$
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="prixTransport">Transport par jour</label>
-                </td>
-                <td>
-                    <input id="prixTransport" type="number" min="0" max="1000" value="12" style="width:80px"></input>$
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="prixVisite">Visite par jour</label>
-                </td>
-                <td>
-                    <input id="prixVisite" type="number" min="0" max="1000" value="15" style="width:80px"></input>$
-                </td>
-            </tr>
-            <tr>
-                <td>&#160;</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="sousTotal">Prix par personne sans l'avion</label>
-                </td>
-                <td>
-                    <input id="sousTotal" type="number" value="469" readonly style="width:80px;background-color: #ebebeb;"></input>$
-                </td>
-            </tr>
-            <tr>
-                <td>&#160;</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="prixAvion">Prix de l'avion</label>
-                </td>
-                <td>
-                    <input id="prixAvion" type="number" min="0" max="10000" value="1500" style="width:80px"></input>$
-                </td>
-            </tr>
-            <tr>
-                <td>&#160;</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="total">Prix total par personne (approximation)</label>
-                </td>
-                <td>
-                    <input id="total" type="number" value="1969" readonly style="width:80px;background-color: #ebebeb;"></input>$
-                </td>
-            </tr>
-        </table>
+	<div class="divNbJour">
+		<label for="nbJour">Quel est la dur&eacute; du voyage : </label>
+		<input id="nbJour" type="number" min="1" max="365" value="7" style="width:60px"></input> nuits.
+	</div>
+	<br />
+	<div class="divTypeNuit">
+		<h3>&#128716; La nuit : </h3>
+		<input type="radio" name="typeNuit" value="1"> Camping / Temple / Si c'est gratuit, j'y dors!<br />
+		<input type="radio" name="typeNuit" value="2" checked> Airbnb / Auberge de jeunesse<br />
+		<input type="radio" name="typeNuit" value="3"> Chambre priv&eacute; dans un hotel pas trop cher<br />
+		<input type="radio" name="typeNuit" value="4"> Hotel plus haut de gamme<br />
+		<br />
+		<label for="nbPersonne">Combien de personne vont partager la chambre : </label>
+		<input id="nbPersonne" type="number" min="1" max="5" value="2" style="width:60px"></input> personnes. (Entre 1 et 5 personnes)
+	</div>
+	<br />
+	<hr />
+	<br />
+	<div class="divTypeNourriture">
+		<h3>&#127857; La nourriture : </h3>
+		<input type="radio" name="typeNourriture" value="1"> &eacute;picerie seulement<br />
+		<input type="radio" name="typeNourriture" value="2" checked> Kombini, parfois &eacute;picerie<br />
+		<input type="radio" name="typeNourriture" value="3"> Restaurant, parfois kombini<br />
+		<input type="radio" name="typeNourriture" value="4"> Juste restaurant<br />
+		<input type="radio" name="typeNourriture" value="5"> Juste restaurant haut de gamme<br />
+		<legend style="font-size:13px;margin-top:5px">Truc : Les kombini sont des sup&eacute;rettes servant des repas frais et vari&eacute;s, allant de spaghetti au bento complet, et même au sushi, pour des prix assez bas (7-Eleven, Lawson, Family-Mart)</legend>
+	</div>
+	<br />
+	<hr />
+	<br />
+	<div class="divTypeTransport">
+		<h3>&#128646; Les transports : </h3>
+		<input type="radio" name="typeTransport" value="1"> Je vais juste marcher<br />
+		<input type="radio" name="typeTransport" value="2" checked> Je vais march&eacute; et prendre les transport en commun<br />
+		<input type="radio" name="typeTransport" value="3"> Je vais juste prendre les transports en commun<br />
+		<input type="radio" name="typeTransport" value="4"> Je vais louer une voiture<br />
+		<input type="radio" name="typeTransport" value="5"> Je vais prendre des uber ou taxi<br />
+		<legend style="font-size:13px;margin-top:5px">Truc : Les transports en commun sont tr&egrave;s r&eacute;pandus, fiables et vari&eacute;s (train, m&eacute;tro, tramway, bus, etc.)</legend>
+	</div>
+	<br />
+	<hr />
+	<br />
+	<div class="divTypeVisit">
+		<h3>&#127983; Les visites : </h3>
+		<input type="radio" name="typeVisit" value="1"> Si c'est gratuit, ou quelque dollars, je suis partant<br />
+		<input type="radio" name="typeVisit" value="2" checked> Payer un peut plus ch&egrave;re pour parfoit visiter de plus gros mus&eacute;es ou des zoos/aquariums<br />
+		<input type="radio" name="typeVisit" value="3"> Je ne regarde pas les d&eacute;pensse pour les visite, c'est pour &ccedil;a que je suis l&agrave;<br />
+		<legend style="font-size:13px;margin-top:5px">Truc : Beaucoup de parc, jardins et temple sont gratuit &agrave; visiter</legend>
+	</div>
+	<br />
+	<hr />
+	<br />
+	<div class="divTypeVisit">
+	<label for="sliderPrixAvion">Prix pour le billet d'avion : </label>
+	<input id="sliderPrixAvion" type="range" min="500" max="3000" value="1500" class="slider" style="width:70%">
+	<span style="font-weight:bold;font-size:16px"><span id="prixAvionSlider">1500</span><span>&nbsp;$</span></span>
+	<br />
+	<hr />
+	<br />
+  <h3>Détails<h3>
+	<table id="tableauPrix" align="center">
+		<tr>
+			<th>&Eacute;l&eacute;ments</th>
+			<th>Prix</th>
+		</tr>
+		<tr>
+			<td>
+				<label for="prixNuit">Dollars la nuit en moyenne</label>
+			</td>
+			<td>
+				<input id="prixNuit" type="number" min="0" max="1000" value="30" style="width:80px"></input>$
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label for="prixNourriture">Nourriture par jour</label>
+			</td>
+			<td>
+				<input id="prixNourriture" type="number" min="0" max="1000" value="15" style="width:80px"></input>$
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label for="prixTransport">Transport par jour</label>
+			</td>
+			<td>
+				<input id="prixTransport" type="number" min="0" max="1000" value="12" style="width:80px"></input>$
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label for="prixVisit">Visite par jour</label>
+			</td>
+			<td>
+				<input id="prixVisit" type="number" min="0" max="1000" value="15" style="width:80px"></input>$
+			</td>
+		</tr>
+		<tr>
+			<td>&#160;</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>
+				<label for="sousTotal">Prix par personne sans l'avion</label>
+			</td>
+			<td>
+				<input id="sousTotal" type="number" value="469" readonly style="width:80px;background-color: #ebebeb;"></input>$
+			</td>
+		</tr>
+		<tr>
+			<td>&#160;</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>
+				<label for="prixAvion">Prix de l'avion</label>
+			</td>
+			<td>
+				<input id="prixAvion" type="number" min="0" max="10000" value="1500" style="width:80px"></input>$
+			</td>
+		</tr>
+		<tr>
+			<td>&#160;</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>
+				<label for="total">Prix total par personne (approximation)</label>
+			</td>
+			<td>
+				<input id="total" type="number" value="1969" readonly style="width:80px;background-color: #ebebeb;"></input>$
+			</td>
+		</tr>
+	</table>
 </form>
-
 <div id="floteurPrix">
-    <label for="sousTotalFloteur">Prix total sans l'avion : </label>
-    <input id="sousTotalFloteur" type="number" value="469" readonly style="width:80px;background-color: #ffc9c9;border-width:0px;border:none;text-align:right;font-weight:bold;font-size:15px;"></input><b>$</b><br />
-    <label for="totalFloteur">Prix total avec l'avion : </label>
-    <input id="totalFloteur" type="number" value="1969" readonly style="width:80px;background-color: #ffc9c9;border-width:0px;border:none;text-align:right;font-weight:bold;font-size:15px;"></input><b>$</b>
+	<label for="sousTotalFloteur">Prix total sans l'avion : </label>
+	<input id="sousTotalFloteur" type="number" value="469" readonly style="width:80px;background-color: #ffc9c9;border-width:0px;border:none;text-align:right;font-weight:bold;font-size:15px;"></input><b>$</b><br />
+	<label for="totalFloteur">Prix total avec l'avion : </label>
+	<input id="totalFloteur" type="number" value="1969" readonly style="width:80px;background-color: #ffc9c9;border-width:0px;border:none;text-align:right;font-weight:bold;font-size:15px;"></input><b>$</b>
 </div>
-
-<h3>Version 2.5</h3>
+<h3>Version Beta 2.9</h3>
 <p>Fait par Nicolas Meunier - 2019</p>
+<p><a href="mailto:nicolas.meunier@hotmail.ca?subject=Calculateur de voyage au japon" target="_blank">Me contacter</a></p>
 <p>Prix en $CAD</p>
 
 <script>
-    $('input[type=radio][name=typeNuit]').change(calculNuit);
-    $('input[type=radio][name=typeNourriture]').change(calculNourriture);
-    $('input[type=radio][name=typeTransport]').change(calculTransport);
-    $('input[type=radio][name=typeVisit]').change(calculVisit);
+	$('input[type=radio][name=typeNuit]').change(calculNuit);
+	$('input[type=radio][name=typeNourriture]').change(calculNourriture);
+	$('input[type=radio][name=typeTransport]').change(calculTransport);
+	$('input[type=radio][name=typeVisit]').change(calculVisit);
 
-    $("#nbPersonne").keyup(calculNuit);
-    $("#nbPersonne").change(calculNuit);
+	$("#nbPersonne").keyup(calculNuit);
+	$("#nbPersonne").change(calculNuit);
 
-    $("#nbJour").keyup(calculSousTotal);
-    $("#nbJour").change(calculSousTotal);
-    $("#prixNuit").keyup(calculSousTotal);
-    $("#prixNuit").change(calculSousTotal);
-    $("#prixNourriture").keyup(calculSousTotal);
-    $("#prixNourriture").change(calculSousTotal);
-    $("#prixTransport").keyup(calculSousTotal);
-    $("#prixTransport").change(calculSousTotal);
-    $("#prixVisite").keyup(calculSousTotal);
-    $("#prixVisite").change(calculSousTotal);
-    $("#prixAvion").keyup(calculSousTotal);
-    $("#prixAvion").change(calculSousTotal);
+	$("#nbJour").keyup(calculSousTotal);
+	$("#nbJour").change(calculSousTotal);
+	$("#prixNuit").keyup(calculSousTotal);
+	$("#prixNuit").change(calculSousTotal);
+	$("#prixNourriture").keyup(calculSousTotal);
+	$("#prixNourriture").change(calculSousTotal);
+	$("#prixTransport").keyup(calculSousTotal);
+	$("#prixTransport").change(calculSousTotal);
+	$("#prixVisit").keyup(calculSousTotal);
+	$("#prixVisit").change(calculSousTotal);
+	$("#prixAvion").keyup(calculSousTotal);
+	$("#prixAvion").change(calculSousTotal);
 
-    var slider = document.getElementById("sliderPrixAvion");
-    slider.oninput = function() {
-        $("#prixAvion").val(slider.value);
-        calculSousTotal();
-    }
+	var slider = document.getElementById("sliderPrixAvion");
+	slider.oninput = function() {
+	    $("#prixAvion").val(slider.value);
+	    $("#prixAvionSlider").text(slider.value);
+	    calculSousTotal();
+	}
 
-    function calculSousTotal() {
-        $nbJour = $("#nbJour").val();
-        $prixNuit = $("#prixNuit").val();
-        $prixNourriture = $("#prixNourriture").val();
-        $prixTransport = $("#prixTransport").val();
-        $prixVisite = $("#prixVisite").val();
-        $sousTotal = ($nbJour * $prixNuit) + ($nbJour * $prixNourriture) + ($nbJour * $prixTransport) + ($nbJour * $prixVisite)
-        $("#sousTotal").val($sousTotal);
-        $("#sousTotalFloteur").val($sousTotal);
-        calculTotal();
-    }
+	function calculSousTotal() {
+	    $nbJour = $("#nbJour").val();
+	    $prixNuit = $("#prixNuit").val();
+	    $prixNourriture = $("#prixNourriture").val();
+	    $prixTransport = $("#prixTransport").val();
+	    $prixVisit = $("#prixVisit").val();
+	    $sousTotal = ($nbJour * $prixNuit) + ($nbJour * $prixNourriture) + ($nbJour * $prixTransport) + ($nbJour * $prixVisit)
+	    $("#sousTotal").val($sousTotal);
+	    $("#sousTotalFloteur").val($sousTotal);
+	    calculTotal();
+	}
 
-    function calculTotal() {
-        $sousTotal = $("#sousTotal").val();
-        $prixAvion = $("#prixAvion").val();
-        $total = parseInt($sousTotal) + parseInt($prixAvion);
-        $("#total").val($total);
-        $("#totalFloteur").val($total);
-    }
+	function calculTotal() {
+	    $sousTotal = $("#sousTotal").val();
+	    $prixAvion = $("#prixAvion").val();
+	    $total = parseInt($sousTotal) + parseInt($prixAvion);
+	    $("#total").val($total);
+	    $("#totalFloteur").val($total);
+	}
 
-    function calculNuit() {
-        $choix = $('input[type=radio][name=typeNuit]:checked').val();
-        switch ($choix) {
-            case '1':
-                $("#prixNuit").val("5");
-                break;
-            case '2':
-                switch ($("#nbPersonne").val()) {
-                    case '1':
-                        $("#prixNuit").val("35");
-                        break;
-                    case '2':
-                        $("#prixNuit").val("30");
-                        break;
-                    case '3':
-                    case '4':
-                    case '5':
-                        $("#prixNuit").val("25");
-                        break;
-                    default:
-                        $("#prixNuit").val("25");
-                }
-                break;
-            case '3':
-                switch ($("#nbPersonne").val()) {
-                    case '1':
-                        $("#prixNuit").val("60");
-                        break;
-                    case '2':
-                        $("#prixNuit").val("50");
-                        break;
-                    case '3':
-                    case '4':
-                    case '5':
-                        $("#prixNuit").val("40");
-                        break;
-                    default:
-                        $("#prixNuit").val("40");
-                }
-                break;
-            case '4':
-                switch ($("#nbPersonne").val()) {
-                    case '1':
-                        $("#prixNuit").val("200");
-                        break;
-                    case '2':
-                        $("#prixNuit").val("170");
-                        break;
-                    case '3':
-                    case '4':
-                    case '5':
-                        $("#prixNuit").val("150");
-                        break;
-                    default:
-                        $("#prixNuit").val("150");
-                }
-                break;
-        }
-        calculSousTotal();
-    }
+	function calculNuit() {
+	    $choix = $('input[type=radio][name=typeNuit]:checked').val();
+	    switch ($choix) {
+	        case '1':
+	            $("#prixNuit").val("5");
+	            break;
+	        case '2':
+	            switch ($("#nbPersonne").val()) {
+	                case '1':
+	                    $("#prixNuit").val("35");
+	                    break;
+	                case '2':
+	                    $("#prixNuit").val("30");
+	                    break;
+	                case '3':
+	                case '4':
+	                case '5':
+	                    $("#prixNuit").val("25");
+	                    break;
+	                default:
+	                    $("#prixNuit").val("25");
+	            }
+	            break;
+	        case '3':
+	            switch ($("#nbPersonne").val()) {
+	                case '1':
+	                    $("#prixNuit").val("60");
+	                    break;
+	                case '2':
+	                    $("#prixNuit").val("50");
+	                    break;
+	                case '3':
+	                case '4':
+	                case '5':
+	                    $("#prixNuit").val("40");
+	                    break;
+	                default:
+	                    $("#prixNuit").val("40");
+	            }
+	            break;
+	        case '4':
+	            switch ($("#nbPersonne").val()) {
+	                case '1':
+	                    $("#prixNuit").val("200");
+	                    break;
+	                case '2':
+	                    $("#prixNuit").val("170");
+	                    break;
+	                case '3':
+	                case '4':
+	                case '5':
+	                    $("#prixNuit").val("150");
+	                    break;
+	                default:
+	                    $("#prixNuit").val("150");
+	            }
+	            break;
+	    }
+	    calculSousTotal();
+	}
 
-    function calculNourriture() {
-        $choix = $('input[type=radio][name=typeNourriture]:checked').val();
-        switch ($choix) {
-            case '1':
-                $("#prixNourriture").val("10");
-                break;
-            case '2':
-                $("#prixNourriture").val("15");
-                break;
-            case '3':
-                $("#prixNourriture").val("30");
-                break;
-            case '4':
-                $("#prixNourriture").val("60");
-                break;
-            case '5':
-                $("#prixNourriture").val("150");
-                break;
-        }
-        calculSousTotal();
-    }
+	function calculNourriture() {
+	    $choix = $('input[type=radio][name=typeNourriture]:checked').val();
+	    switch ($choix) {
+	        case '1':
+	            $("#prixNourriture").val("10");
+	            break;
+	        case '2':
+	            $("#prixNourriture").val("15");
+	            break;
+	        case '3':
+	            $("#prixNourriture").val("30");
+	            break;
+	        case '4':
+	            $("#prixNourriture").val("60");
+	            break;
+	        case '5':
+	            $("#prixNourriture").val("150");
+	            break;
+	    }
+	    calculSousTotal();
+	}
 
-    function calculTransport() {
-        $choix = $('input[type=radio][name=typeTransport]:checked').val();
-        switch ($choix) {
-            case '1':
-                $("#prixTransport").val("0");
-                break;
-            case '2':
-                $("#prixTransport").val("12");
-                break;
-            case '3':
-                $("#prixTransport").val("20");
-                break;
-            case '4':
-                $("#prixTransport").val("90");
-                break;
-            case '5':
-                $("#prixTransport").val("120");
-                break;
-        }
-        calculSousTotal();
-    }
+	function calculTransport() {
+	    $choix = $('input[type=radio][name=typeTransport]:checked').val();
+	    switch ($choix) {
+	        case '1':
+	            $("#prixTransport").val("0");
+	            break;
+	        case '2':
+	            $("#prixTransport").val("12");
+	            break;
+	        case '3':
+	            $("#prixTransport").val("20");
+	            break;
+	        case '4':
+	            $("#prixTransport").val("90");
+	            break;
+	        case '5':
+	            $("#prixTransport").val("120");
+	            break;
+	    }
+	    calculSousTotal();
+	}
 
-    function calculVisit() {
-        $choix = $('input[type=radio][name=typeVisit]:checked').val();
-        switch ($choix) {
-            case '1':
-                $("#prixVisit").val("3");
-                break;
-            case '2':
-                $("#prixVisit").val("12");
-                break;
-            case '3':
-                $("#prixVisit").val("30");
-                break;
-        }
-        calculSousTotal();
-    }
+	function calculVisit() {
+	    $choix = $('input[type=radio][name=typeVisit]:checked').val();
+	    switch ($choix) {
+	        case '1':
+	            $("#prixVisit").val("3");
+	            break;
+	        case '2':
+	            $("#prixVisit").val("12");
+	            break;
+	        case '3':
+	            $("#prixVisit").val("30");
+	            break;
+	    }
+	    calculSousTotal();
+	}
 </script>
+
+
+
+</body>
+</html>
