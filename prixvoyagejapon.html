@@ -16,13 +16,18 @@
 
 
 <style>
+  body {
+    background-image: url("https://i.imgur.com/PBheOFn.png");
+    background-repeat: repeat;
+  }
 	table {
     font-family: arial,
     sans-serif;
     border-collapse: collapse;
     width: 98%;
     box-shadow: 0px 0px 6px grey;
-
+    margin-top: 10px;
+    margin-bottom: 10px;
     }
     td,
     th {
@@ -49,16 +54,16 @@
     .slider::-webkit-slider-thumb {
     	-webkit-appearance: none;
     	appearance: none;
-    	width: 25px;
+    	width: 114px;
     	height: 25px;
-    	background: #ffa6a6;
-    	cursor: pointer;
+      background: url('https://i.imgur.com/xkZU8cD.png');
+    	cursor: grab;
     }
     .slider::-moz-range-thumb {
-    	width: 25px;
+      width: 114px;
     	height: 25px;
-    	background: #ffa6a6;
-    	cursor: pointer;
+      background: url('https://i.imgur.com/xkZU8cD.png');
+    	cursor: grab;
     }
     #floteurPrix {
     	position: fixed;
@@ -71,6 +76,17 @@
     	padding: 10px;
     	text-align: center;
     }
+    #floteurPrix p {
+      font-weight: bold;
+      margin: 0px;
+      color: #666666;
+    }
+    .floteurMontant {
+      font-size: 16px;
+    }
+    #contentfooter {
+     display:none;
+    }
 </style>
 <h1 style="text-align:center">Calculateur de prix pour un voyage au japon</h1>
 <h2 style="text-align:center">Version Beta (peut contenir des bugs et n'est pas fait pour mobile)</h2>
@@ -78,7 +94,7 @@
 <h4 style="text-align:center">Prix par personne en dollar canadien ($CAD)</h4>
 <form>
 	<div class="divNbJour">
-		<label for="nbJour">Quel est la dur&eacute; du voyage : </label>
+		<label for="nbJour">Quelle est la dur&eacute;e du voyage : </label>
 		<input id="nbJour" type="number" min="1" max="365" value="7" style="width:60px"></input> nuits.
 	</div>
 	<br />
@@ -86,10 +102,10 @@
 		<h3>&#128716; La nuit : </h3>
 		<input type="radio" name="typeNuit" value="1"> Camping / Temple / Si c'est gratuit, j'y dors!<br />
 		<input type="radio" name="typeNuit" value="2" checked> Airbnb / Auberge de jeunesse<br />
-		<input type="radio" name="typeNuit" value="3"> Chambre priv&eacute; dans un hotel pas trop cher<br />
-		<input type="radio" name="typeNuit" value="4"> Hotel plus haut de gamme<br />
+		<input type="radio" name="typeNuit" value="3"> Chambre priv&eacute;e dans un h&ocirc;tel pas trop cher<br />
+		<input type="radio" name="typeNuit" value="4"> H&ocirc;tel plus haut de gamme<br />
 		<br />
-		<label for="nbPersonne">Combien de personne vont partager la chambre : </label>
+		<label for="nbPersonne">Combien de personnes vont partager la chambre : </label>
 		<input id="nbPersonne" type="number" min="1" max="5" value="2" style="width:60px"></input> personnes. (Entre 1 et 5 personnes)
 	</div>
 	<br />
@@ -110,7 +126,7 @@
 	<div class="divTypeTransport">
 		<h3>&#128646; Les transports : </h3>
 		<input type="radio" name="typeTransport" value="1"> Je vais juste marcher<br />
-		<input type="radio" name="typeTransport" value="2" checked> Je vais march&eacute; et prendre les transport en commun<br />
+		<input type="radio" name="typeTransport" value="2" checked> Je vais marcher et prendre les transports en commun<br />
 		<input type="radio" name="typeTransport" value="3"> Je vais juste prendre les transports en commun<br />
 		<input type="radio" name="typeTransport" value="4"> Je vais louer une voiture<br />
 		<input type="radio" name="typeTransport" value="5"> Je vais prendre des uber ou taxi<br />
@@ -122,21 +138,26 @@
 	<div class="divTypeVisit">
 		<h3>&#127983; Les visites : </h3>
 		<input type="radio" name="typeVisit" value="1"> Si c'est gratuit, ou quelque dollars, je suis partant<br />
-		<input type="radio" name="typeVisit" value="2" checked> Payer un peut plus ch&egrave;re pour parfoit visiter de plus gros mus&eacute;es ou des zoos/aquariums<br />
-		<input type="radio" name="typeVisit" value="3"> Je ne regarde pas les d&eacute;pensse pour les visite, c'est pour &ccedil;a que je suis l&agrave;<br />
+		<input type="radio" name="typeVisit" value="2" checked> Payer un peut plus ch&egrave;re pour parfois visiter de plus gros mus&eacute;es ou des zoos/aquariums<br />
+		<input type="radio" name="typeVisit" value="3"> Je ne regarde pas les d&eacute;penses pour les visites, c'est pour &ccedil;a que je suis l&agrave;<br />
 		<legend style="font-size:13px;margin-top:5px">Truc : Beaucoup de parc, jardins et temple sont gratuit &agrave; visiter</legend>
 	</div>
 	<br />
 	<hr />
 	<br />
 	<div class="divTypeVisit">
-	<label for="sliderPrixAvion">Prix pour le billet d'avion : </label>
-	<input id="sliderPrixAvion" type="range" min="500" max="3000" value="1500" class="slider" style="width:70%">
-	<span style="font-weight:bold;font-size:16px"><span id="prixAvionSlider">1500</span><span>&nbsp;$</span></span>
+    <div style="text-align:center">
+    	<label for="sliderPrixAvion">Prix pour le billet d'avion : </label>
+      <span style="font-weight:bold;font-size:16px"><span id="prixAvionSlider">1500</span><span>&nbsp;$</span></span>
+    </div>
+  <br/>
+	<div style="margin:auto;width:90%">
+    <input id="sliderPrixAvion" type="range" min="500" max="3000" value="1500" class="slider">
+  </div>
 	<br />
 	<hr />
 	<br />
-  <h3>Détails<h3>
+  <h3>Détails</h3>
 	<table id="tableauPrix" align="center">
 		<tr>
 			<th>&Eacute;l&eacute;ments</th>
@@ -213,17 +234,21 @@
 	</table>
 </form>
 <div id="floteurPrix">
-	<label for="sousTotalFloteur">Prix total sans l'avion : </label>
-	<input id="sousTotalFloteur" type="number" value="469" readonly style="width:80px;background-color: #ffc9c9;border-width:0px;border:none;text-align:right;font-weight:bold;font-size:15px;"></input><b>$</b><br />
-	<label for="totalFloteur">Prix total avec l'avion : </label>
-	<input id="totalFloteur" type="number" value="1969" readonly style="width:80px;background-color: #ffc9c9;border-width:0px;border:none;text-align:right;font-weight:bold;font-size:15px;"></input><b>$</b>
+  <p>
+    Prix total sans l'avion : <span class="floteurMontant"><span id="sousTotalFloteur">469</span>&nbsp$</span>
+    <br />
+    <br />
+    Prix total avec l'avion : <span class="floteurMontant"><span id="totalFloteur">2004</span>&nbsp$</span>
+  </p>
 </div>
-<h3>Version Beta 2.9</h3>
+<h3>Version Beta 3.1</h3>
 <p>Fait par Nicolas Meunier - 2019</p>
 <p><a href="mailto:nicolas.meunier@hotmail.ca?subject=Calculateur de voyage au japon" target="_blank">Me contacter</a></p>
 <p>Prix en $CAD</p>
 
 <script>
+calculSousTotal();
+
 	$('input[type=radio][name=typeNuit]').change(calculNuit);
 	$('input[type=radio][name=typeNourriture]').change(calculNourriture);
 	$('input[type=radio][name=typeTransport]').change(calculTransport);
@@ -260,7 +285,7 @@
 	    $prixVisit = $("#prixVisit").val();
 	    $sousTotal = ($nbJour * $prixNuit) + ($nbJour * $prixNourriture) + ($nbJour * $prixTransport) + ($nbJour * $prixVisit)
 	    $("#sousTotal").val($sousTotal);
-	    $("#sousTotalFloteur").val($sousTotal);
+	    $("#sousTotalFloteur").text($sousTotal);
 	    calculTotal();
 	}
 
@@ -269,7 +294,7 @@
 	    $prixAvion = $("#prixAvion").val();
 	    $total = parseInt($sousTotal) + parseInt($prixAvion);
 	    $("#total").val($total);
-	    $("#totalFloteur").val($total);
+	    $("#totalFloteur").text($total);
 	}
 
 	function calculNuit() {
