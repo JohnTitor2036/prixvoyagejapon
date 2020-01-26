@@ -131,6 +131,7 @@ h3 {
 
 #comment_aider {
 	list-style-position: inside;
+	padding-left: 0;
 }
 
 #comment_aider li {
