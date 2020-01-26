@@ -1,0 +1,163 @@
+body,
+html {
+	height: 100%;
+	margin: 0px!important;
+}
+
+.bg {
+	/* The image used */
+	background-image: url("https://i.imgur.com/pnCOdzd.jpg");
+	padding: 2%;
+	/* Center and scale the image nicely */
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-attachment: fixed;
+}
+
+table {
+	font-family: arial, sans-serif;
+	border-collapse: collapse;
+	width: 98%;
+	box-shadow: 0px 0px 6px grey;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+td,
+th {
+	border: 1px solid #942626;
+	text-align: left;
+	padding: 8px;
+}
+
+.slidecontainer {
+	width: 100%;
+}
+
+.slider {
+	-webkit-appearance: none;
+	width: 100%;
+	height: 25px;
+	background-image: url("https://i.imgur.com/99VVede.png");
+	background-repeat: repeat;
+	outline: none;
+	opacity: 0.8;
+	-webkit-transition: .2s;
+	transition: opacity .2s;
+	border-radius: 5px;
+	box-shadow: 0px 0px 6px grey;
+}
+
+.slider:hover {
+	opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	appearance: none;
+	width: 136px;
+	height: 30px;
+	background: url('https://i.imgur.com/zvW59IJ.png');
+	cursor: grab;
+}
+
+.slider::-moz-range-thumb {
+	width: 136px;
+	height: 30px;
+	background: url('https://i.imgur.com/zvW59IJ.png');
+	cursor: grab;
+}
+
+#floteurPrix {
+	position: fixed;
+	width: 33%;
+	left: 33%;
+	background: white;
+	bottom: 10px;
+	border: 2px solid #bf0000;
+	border-radius: 10px;
+	box-shadow: 0px 0px 6px grey;
+	padding: 10px;
+	text-align: center;
+}
+
+#floteurPrix p {
+	font-weight: bold;
+	margin: 0px;
+	color: black;
+}
+
+.floteurMontant {
+	font-size: 16px;
+}
+
+.categorie {
+	display: inline-block;
+}
+
+.icon {
+	font-size: 35px;
+}
+
+h3 {
+	margin-bottom: 10px;
+	margin-top: 0px;
+}
+
+.title {
+		color: #bf0000;
+		text-align: center;
+}
+
+.section {
+	background: white;
+	padding: 10px;
+	margin: auto;
+	border-radius: 10px;
+}
+
+.fit {
+		width: fit-content;
+}
+
+#footer{
+	text-align: center;
+	margin-bottom: 100px;
+}
+
+@media (max-width: 800px) {
+	.slider {
+		-webkit-appearance: none;
+		width: 100%;
+		height: 25px;
+		background: #f7f7f7;
+		outline: none;
+		opacity: 0.7;
+		-webkit-transition: .2s;
+		transition: opacity .2s;
+	}
+	.slider::-webkit-slider-thumb {
+		-webkit-appearance: none;
+		appearance: none;
+		width: 25px;
+		height: 25px;
+		background: #ffa6a6;
+		cursor: pointer;
+	}
+	.slider::-moz-range-thumb {
+		width: 25px;
+		height: 25px;
+		background: #ffa6a6;
+		cursor: pointer;
+	}
+	#floteurPrix {
+		width: 80%;
+		left: 8%;
+	}
+	.divNbJour {
+		display: block;
+		text-align: center;
+		margin-bottom:0px!important;
+	}
+}

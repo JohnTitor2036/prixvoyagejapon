@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="fr">
+	<head>
+		<meta charset="utf-8">
+		<title>Calculateur de prix pour un voyage au japon</title>
+		<meta name="description" content="Calculer le coût d'un voyage au japon, selon plusieurs critères">
+		<link rel="stylesheet" type="text/css" href="styles/base.css" media="all" />
+		<meta name="viewport" content="user-scalable=yes, initial-scale=1, width=device-width" />
+		<meta name="author" content="Nicolas Meunier">
+		<meta name="revisit-after" content="1 days" />
+		<meta name="language" content="FR" />
+		<meta name="msapplication-TileColor" content="#ff2121">
+		<meta name="theme-color" content="#ff2121"/>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	</head>
+	<body>
+		<div class="bg">
+			<h1 class="title section fit">Calculateur de prix pour un voyage au japon</h1>
+			<h4 class="title section fit" style="margin-bottom:10px;margin-top:10px">Prix par personne en dollar canadien ($CAD)</h4>
+			<form>
+				<div class="divNbJour categorie section fit" style="margin-bottom:10px;">
+					<label for="nbJour">Quelle est la dur&eacute;e du voyage&nbsp;: </label>
+					<input id="nbJour" type="number" min="1" max="365" value="7" style="width:60px"> nuits.
+				</div>
+				<br />
+				<div class="divTypeNuit categorie section fit">
+					<h3><span class="icon">&#128716;</span> La nuit : </h3>
+					<input type="radio" name="typeNuit" value="1"> Camping / Temple / Si c'est gratuit, j'y dors!<br />
+					<input type="radio" name="typeNuit" value="2" checked> Airbnb / Auberge de jeunesse<br />
+					<input type="radio" name="typeNuit" value="3"> Chambre priv&eacute;e dans un h&ocirc;tel pas trop cher<br />
+					<input type="radio" name="typeNuit" value="4"> H&ocirc;tel plus haut de gamme<br />
+					<br />
+					<label for="nbPersonne">Combien de personnes vont partager la chambre&nbsp;: </label>
+					<input id="nbPersonne" type="number" min="1" max="5" value="2" style="width:60px">&nbsp;personnes. (Entre 1 et 5 personnes)
+				</div>
+				<br />
+				<hr />
+				<br />
+				<div class="divTypeNourriture categorie section fit">
+					<h3><span class="icon">&#127857;</span> La nourriture : </h3>
+					<input type="radio" name="typeNourriture" value="1"> &Eacute;picerie seulement<br />
+					<input type="radio" name="typeNourriture" value="2" checked> Kombini, parfois &eacute;picerie<br />
+					<input type="radio" name="typeNourriture" value="3"> Restaurant, parfois kombini<br />
+					<input type="radio" name="typeNourriture" value="4"> Juste restaurant<br />
+					<input type="radio" name="typeNourriture" value="5"> Juste restaurant haut de gamme<br />
+					<legend style="font-size:13px;margin-top:5px">Truc : Les kombini sont des sup&eacute;rettes servant des repas frais et vari&eacute;s, allant de spaghetti au bento complet, et même au sushi, pour des prix assez bas (7-Eleven, Lawson, Family-Mart)</legend>
+				</div>
+				<br />
+				<hr />
+				<br />
+				<div class="divTypeTransport categorie section fit">
+					<h3><span class="icon">&#128646;</span> Les transports : </h3>
+					<input type="radio" name="typeTransport" value="1"> Je vais juste marcher<br />
+					<input type="radio" name="typeTransport" value="2" checked> Je vais marcher et prendre les transports en commun<br />
+					<input type="radio" name="typeTransport" value="3"> Je vais juste prendre les transports en commun<br />
+					<input type="radio" name="typeTransport" value="4"> Je vais louer une voiture<br />
+					<input type="radio" name="typeTransport" value="5"> Je vais prendre des Uber ou taxi<br />
+					<legend style="font-size:13px;margin-top:5px">Truc : Les transports en commun sont tr&egrave;s r&eacute;pandus, fiables et vari&eacute;s (train, m&eacute;tro, tramway, bus, etc.)</legend>
+				</div>
+				<br />
+				<hr />
+				<br />
+				<div class="divTypeVisit categorie section fit">
+					<h3><span class="icon">&#127983;</span> Les visites : </h3>
+					<input type="radio" name="typeVisit" value="1"> Si c'est gratuit, ou quelque dollars, je suis partant<br />
+					<input type="radio" name="typeVisit" value="2" checked> Payer un peu plus cher pour parfois visiter de plus gros mus&eacute;es ou des zoos/aquariums<br />
+					<input type="radio" name="typeVisit" value="3"> Je ne regarde pas les d&eacute;penses pour les visites, c'est pour &ccedil;a que je suis l&agrave;<br />
+					<legend style="font-size:13px;margin-top:5px">Truc : Beaucoup de parc, jardins et temples sont gratuits &agrave; visiter</legend>
+				</div>
+				<br />
+				<hr />
+				<br />
+				<div class="section">
+				  <div>
+							<label for="sliderPrixAvion">Prix pour le billet d'avion : </label>
+							<span style="font-weight:bold;font-size:16px"><span id="prixAvionSlider">1500</span><span>&nbsp;$</span></span>
+						</div>
+						<br/>
+						<div style="margin:auto;width:90%">
+							<input id="sliderPrixAvion" type="range" min="500" max="3000" value="1500" class="slider">
+						</div>
+				</div>
+				<br />
+				<hr />
+				<br />
+				<h3 class="title section fit">Détails</h3>
+				<table id="tableauPrix" align="center" style="background:white">
+					<tr>
+						<th>&Eacute;l&eacute;ments</th>
+						<th>Prix</th>
+					</tr>
+					<tr>
+						<td>
+							<label for="prixNuit">Prix la nuit en moyenne</label>
+						</td>
+						<td>
+							<input id="prixNuit" type="number" min="0" max="1000" value="30" style="width:80px">$
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<label for="prixNourriture">Nourriture par jour</label>
+						</td>
+						<td>
+							<input id="prixNourriture" type="number" min="0" max="1000" value="15" style="width:80px">$
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<label for="prixTransport">Transport par jour</label>
+						</td>
+						<td>
+							<input id="prixTransport" type="number" min="0" max="1000" value="12" style="width:80px">$
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<label for="prixVisit">Visite par jour</label>
+						</td>
+						<td>
+							<input id="prixVisit" type="number" min="0" max="1000" value="15" style="width:80px">$
+						</td>
+					</tr>
+					<tr>
+						<td>&#160;</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>
+							<label for="sousTotal">Prix par personne sans l'avion</label>
+						</td>
+						<td>
+							<input id="sousTotal" type="number" value="469" readonly style="width:80px;background-color: #ebebeb;">$
+						</td>
+					</tr>
+					<tr>
+						<td>&#160;</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>
+							<label for="prixAvion">Prix de l'avion</label>
+						</td>
+						<td>
+							<input id="prixAvion" type="number" min="0" max="10000" value="1500" style="width:80px">$
+						</td>
+					</tr>
+					<tr>
+						<td>&#160;</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>
+							<label for="total">Prix total par personne (approximation)</label>
+						</td>
+						<td>
+							<input id="total" type="number" value="1969" readonly style="width:80px;background-color: #ebebeb;">$
+						</td>
+					</tr>
+				</table>
+			</form>
+			<div id="floteurPrix">
+				<p>
+					Prix total sans l'avion : <span class="floteurMontant"><span id="sousTotalFloteur">469</span>&nbsp$</span>
+					<br />
+					<br />
+					Prix total avec l'avion : <span class="floteurMontant"><span id="totalFloteur">2004</span>&nbsp$</span>
+				</p>
+			</div>
+			<div class="section" id="footer">
+				<h3>Version 3.6</h3>
+				<p>Fait par Nicolas Meunier - 2020</p>
+				<p>
+					<a href="http://voyagejapon.ca/beta.html">Cliquez ici pour essayer la version Beta</a>
+				</p>
+				<p>Prix en $CAD</p>
+				<p>Statistiques basées sur <i>4</i> personnes, pour un total de <i>136</i> jours de voyage au Japon.</p>
+				<p>Vous avez déjà voyagé au Japon et vous aimeriez contribuer au site web ? Merci de <a href="mailto:nicolas.meunier@hotmail.ca?subject=Calculateur de voyage au japon" target="_blank">me contacter ici!</a></p>
+			</div>
+		</div>
+		<script src="scripts/base.js"></script>
+	</body>
+</html>
