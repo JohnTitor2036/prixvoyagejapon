@@ -1,0 +1,31 @@
+//https://www.japan-rail-pass.fr/jr-pass
+
+//JR Pass National
+const JRP_NAT_7_ORD_CHILD = 178;
+const JRP_NAT_14_ORD_CHILD = 284;
+const JRP_NAT_21_ORD_CHILD = 363;
+
+const JRP_NAT_7_ORD_ADULT = 356;
+const JRP_NAT_14_ORD_ADULT = 567;
+const JRP_NAT_21_ORD_ADULT = 725;
+
+const JRP_NAT_7_GREEN_CHILD = 238;
+const JRP_NAT_14_GREEN_CHILD = 385;
+const JRP_NAT_21_GREEN_CHILD = 500;
+
+const JRP_NAT_7_GREEN_ADULT = 475;
+const JRP_NAT_14_GREEN_ADULT = 769;
+const JRP_NAT_21_GREEN_ADULT = 999;
+
+//JR Pass Régionaux
+
+//Kansai
+const JRP_KANSAI_1_ADULT = 475;
+const JRP_KANSAI_2_ADULT = 475;
+const JRP_KANSAI_3_ADULT = 475;
+const JRP_KANSAI_4_ADULT = 475;
+
+const JRP_KANSAI_1_CHILD = 475;
+const JRP_KANSAI_2_CHILD = 475;
+const JRP_KANSAI_3_CHILD = 475;
+const JRP_KANSAI_4_CHILD = 475;
