@@ -3,8 +3,8 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>Calculateur de prix pour un voyage au japon</title>
-	<meta name="description" content="Calculer le coût d'un voyage au japon, selon plusieurs critères">
+	<title>Calculateur de prix pour un voyage au Japon</title>
+	<meta name="description" content="Calculer le coût d'un voyage au Japon, selon plusieurs critères">
 	<link rel="stylesheet" type="text/css" href="styles/base.css" media="all" />
 	<meta name="viewport" content="user-scalable=yes, initial-scale=1, width=device-width" />
 	<meta name="author" content="Nicolas Meunier">
@@ -17,7 +17,7 @@
 
 <body>
 	<div class="bg">
-		<h1 class="title section fit">Calculateur de prix pour un voyage au japon</h1>
+		<h1 class="title section fit">Calculateur de prix pour un voyage au Japon</h1>
 		<h4 class="title section fit" style="margin-bottom:10px;margin-top:10px">Prix par personne en dollar canadien
 			($CAD)</h4>
 		<form>
@@ -71,7 +71,7 @@
 			<br />
 			<div class="divTypeVisit categorie section fit">
 				<h3><span class="icon">&#127983;</span> Les visites : </h3>
-				<input type="radio" name="typeVisit" value="1"> Si c'est gratuit, ou quelque dollars, je suis
+				<input type="radio" name="typeVisit" value="1"> Si c'est gratuit, ou quelques dollars, je suis
 				partant<br />
 				<input type="radio" name="typeVisit" value="2" checked> Payer un peu plus cher pour parfois visiter de
 				plus gros mus&eacute;es ou des zoos/aquariums<br />
@@ -86,8 +86,13 @@
 			<div class="section">
 				<div>
 					<label for="sliderPrixAvion">Prix pour le billet d'avion : </label>
-					<span style="font-weight:bold;font-size:16px"><span
-							id="prixAvionSlider">1500</span><span>&nbsp;$</span></span>
+					<span style="font-weight:bold;font-size:16px">
+						<span id="prixAvionSlider">1500</span>
+						<span>&nbsp;$</span>
+					</span>
+					<legend style="font-size:13px;margin-top:5px">1500 $ est la valeur par défaut, car c'est un prix
+						moyen pour un billet aller-retour Montréal-Japan durant l'été. Un très bon prix serait autour de
+						1000$, un bon prix est entre 1000$ et 1500$, et un prix trop cher est plus de 1500 $.</legend>
 				</div>
 				<br />
 				<div style="margin:auto;width:90%">
@@ -185,54 +190,24 @@
 			</p>
 		</div>
 		<div class="section" id="footer_info">
-			<p>Prix en $CAD par personne</p>
-			<p>Statistiques basées sur <span class="important italic">4</span> personnes, pour un total de <span
-					class="important italic">136</span> jours de voyage au Japon.</p>
+			<p>Prix en <span class="important italic">$CAD</span> par personne</p>
+			<p>Les prix utilisés pour le calcul sont basés sur
+				<span class="important italic"> 3 </span>voyages (2018, 2019, 2023), selon
+				<span class="important italic"> 5 </span>personnes différentes, pour un total de
+				<span class="important italic"> 208 </span>jours de voyage au Japon.
+			</p>
 		</div>
 		<div class="section" id="footer_autre">
-			<h3>Version 3.7</h3>
+			<h3>Version 3.8.1</h3>
 			<p>
 				Fait par
-				<a href="mailto:nicolas.meunier@hotmail.ca?subject=Calculateur de voyage au japon" target="_blank">
+				<a href="mailto:nicolas.meunier@hotmail.ca?subject=Calculateur de voyage au Japon" target="_blank">
 					Nicolas Meunier
-				</a>
-				- 2020
+				</a> - 2024
 			</p>
-			<h3>Comment contribuer au projet ?</h3>
-			<p>
-				Si vous aimeriez m'aider et soutenir ce projet, voici comment vous pouvez vous y prendre :
-			</p>
-			<ul id="comment_aider">
-				<li>
-					<span class="important">Vous avez des idées pour améliorer le site web?</span> Vous pouvez
-					<a href="mailto:nicolas.meunier@hotmail.ca?subject=Calculateur de voyage au japon - Contribuer"
-						target="_blank">
-						me contacter ici!
-					</a>
-				</li>
-				<li>
-					<span class="important">Partager le site</span> à vos amis, collègues ou votre famille est une
-					excellente façon de m'aider
-					gratuitement!
-				</li>
-				<li>
-					<span class="important">Vous avez déjà voyagé au Japon?</span> Si vous aimeriez contribuer au site
-					web facilement, merci de
-					<a href="mailto:nicolas.meunier@hotmail.ca?subject=Calculateur de voyage au japon - Contribuer"
-						target="_blank">
-						me contacter ici!
-					</a>
-				</li>
-				<li>
-					<span class="important">Vous aimez la programmation web?</span> Ce projet est Open Source et vous
-					pouvez aider à
-					<a href="https://github.com/JohnTitor2036/prixvoyagejapon" target="_blank">
-						l'améliorer sur GitHub!
-					</a>
-				</li>
-			</ul>
 		</div>
 	</div>
+	<script src="scripts/constants.js"></script>
 	<script src="scripts/base.js"></script>
 </body>
 

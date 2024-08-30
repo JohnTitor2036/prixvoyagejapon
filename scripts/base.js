@@ -29,142 +29,63 @@ slider.oninput = function () {
 }
 
 function calculSousTotal() {
-	$nbJour = $("#nbJour").val();
-	$prixNuit = $("#prixNuit").val();
-	$prixNourriture = $("#prixNourriture").val();
-	$prixTransport = $("#prixTransport").val();
-	$prixVisit = $("#prixVisit").val();
-	$sousTotal = ($nbJour * $prixNuit) + ($nbJour * $prixNourriture) + ($nbJour * $prixTransport) + ($nbJour * $prixVisit)
+	const $nbJour = $("#nbJour").val();
+	const $prixNuit = $("#prixNuit").val();
+	const $prixNourriture = $("#prixNourriture").val();
+	const $prixTransport = $("#prixTransport").val();
+	const $prixVisit = $("#prixVisit").val();
+	const $sousTotal = ($nbJour * $prixNuit) + ($nbJour * $prixNourriture) + ($nbJour * $prixTransport) + ($nbJour * $prixVisit);
 	$("#sousTotal").val($sousTotal);
 	$("#sousTotalFloteur").text($sousTotal);
 	calculTotal();
 }
 
 function calculTotal() {
-	$sousTotal = $("#sousTotal").val();
-	$prixAvion = $("#prixAvion").val();
-	$total = parseInt($sousTotal) + parseInt($prixAvion);
+	const $sousTotal = $("#sousTotal").val();
+	const $prixAvion = $("#prixAvion").val();
+	const $total = parseInt($sousTotal) + parseInt($prixAvion);
 	$("#total").val($total);
 	$("#totalFloteur").text($total);
 }
 
 function calculNuit() {
-	$choix = $('input[type=radio][name=typeNuit]:checked').val();
+	const $choix = $('input[type=radio][name=typeNuit]:checked').val();
+	const nbPersonne = $("#nbPersonne").val();
+
+	let prixNuit = 0;
 	switch ($choix) {
 		case '1':
-			$("#prixNuit").val("5");
+			prixNuit = PRICES.NUIT.CAMPING;
 			break;
 		case '2':
-			switch ($("#nbPersonne").val()) {
-				case '1':
-					$("#prixNuit").val("35");
-					break;
-				case '2':
-					$("#prixNuit").val("30");
-					break;
-				case '3':
-				case '4':
-				case '5':
-					$("#prixNuit").val("25");
-					break;
-				default:
-					$("#prixNuit").val("25");
-			}
+			prixNuit = (nbPersonne == '1') ? PRICES.NUIT.AIRBNB_1_PERSON : (nbPersonne == '2') ? PRICES.NUIT.AIRBNB_2_PERSONS : PRICES.NUIT.AIRBNB_3_TO_5_PERSONS;
 			break;
 		case '3':
-			switch ($("#nbPersonne").val()) {
-				case '1':
-					$("#prixNuit").val("60");
-					break;
-				case '2':
-					$("#prixNuit").val("50");
-					break;
-				case '3':
-				case '4':
-				case '5':
-					$("#prixNuit").val("40");
-					break;
-				default:
-					$("#prixNuit").val("40");
-			}
+			prixNuit = (nbPersonne == '1') ? PRICES.NUIT.HOTEL_CHEAP_1_PERSON : (nbPersonne == '2') ? PRICES.NUIT.HOTEL_CHEAP_2_PERSONS : PRICES.NUIT.HOTEL_CHEAP_3_TO_5_PERSONS;
 			break;
 		case '4':
-			switch ($("#nbPersonne").val()) {
-				case '1':
-					$("#prixNuit").val("200");
-					break;
-				case '2':
-					$("#prixNuit").val("170");
-					break;
-				case '3':
-				case '4':
-				case '5':
-					$("#prixNuit").val("150");
-					break;
-				default:
-					$("#prixNuit").val("150");
-			}
+			prixNuit = (nbPersonne == '1') ? PRICES.NUIT.HOTEL_LUXE_1_PERSON : (nbPersonne == '2') ? PRICES.NUIT.HOTEL_LUXE_2_PERSONS : PRICES.NUIT.HOTEL_LUXE_3_TO_5_PERSONS;
 			break;
 	}
+
+	$("#prixNuit").val(prixNuit);
 	calculSousTotal();
 }
 
 function calculNourriture() {
-	$choix = $('input[type=radio][name=typeNourriture]:checked').val();
-	switch ($choix) {
-		case '1':
-			$("#prixNourriture").val("10");
-			break;
-		case '2':
-			$("#prixNourriture").val("15");
-			break;
-		case '3':
-			$("#prixNourriture").val("30");
-			break;
-		case '4':
-			$("#prixNourriture").val("60");
-			break;
-		case '5':
-			$("#prixNourriture").val("150");
-			break;
-	}
+	const $choix = $('input[type=radio][name=typeNourriture]:checked').val();
+	$("#prixNourriture").val(PRICES.NOURRITURE[$choix]);
 	calculSousTotal();
 }
 
 function calculTransport() {
-	$choix = $('input[type=radio][name=typeTransport]:checked').val();
-	switch ($choix) {
-		case '1':
-			$("#prixTransport").val("0");
-			break;
-		case '2':
-			$("#prixTransport").val("12");
-			break;
-		case '3':
-			$("#prixTransport").val("20");
-			break;
-		case '4':
-			$("#prixTransport").val("90");
-			break;
-		case '5':
-			$("#prixTransport").val("120");
-			break;
-	}
+	const $choix = $('input[type=radio][name=typeTransport]:checked').val();
+	$("#prixTransport").val(PRICES.TRANSPORT[$choix]);
 	calculSousTotal();
 }
 
 function calculVisit() {
-	$choix = $('input[type=radio][name=typeVisit]:checked').val();
-	switch ($choix) {
-		case '1':
-			$("#prixVisit").val("3");
-			break;
-		case '2':
-			$("#prixVisit").val("12");
-			break;
-		case '3':
-			$("#prixVisit").val("30");
-			break;
-	}
+	const $choix = $('input[type=radio][name=typeVisit]:checked').val();
+	$("#prixVisit").val(PRICES.VISITE[$choix]);
 	calculSousTotal();
 }
