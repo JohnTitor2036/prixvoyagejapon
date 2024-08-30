@@ -11,4 +11,3 @@ Si vous aimeriez m'aider et soutenir ce projet, voici comment vous pouvez vous y
 * Partager le site à vos amis, collègues ou votre famille est une excellente façon de m'aider gratuitement!
 * Vous avez déjà voyagé au Japon? Si vous aimeriez contribuer au site web facilement, merci de [me contacter ici!](mailto:nicolas.meunier@hotmail.ca?subject=Calculateur%20de%20voyage%20au%20Japon%20-%20Contribuer)
 * Vous aimez la programmation web? Vous pouvez aider à l'améliorer ici, sur GitHub!
-* Vous vous sentez d'humeur généreuse? J'accepte les dons de n'importe quel montant via [PayPal](paypal.me/NMeunier) ou [autres!](mailto:nicolas.meunier@hotmail.ca?subject=Calculateur%20de%20voyage%20au%20Japon%20-%20Don)
