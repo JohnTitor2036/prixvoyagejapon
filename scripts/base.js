@@ -74,18 +74,75 @@ function calculNuit() {
 
 function calculNourriture() {
 	const $choix = $('input[type=radio][name=typeNourriture]:checked').val();
-	$("#prixNourriture").val(PRICES.NOURRITURE[$choix]);
+
+	let prixNourriture = 0;
+
+	switch ($choix) {
+		case '1':
+			prixNourriture = PRICES.NOURRITURE.EPICERIE;
+			break;
+		case '2':
+			prixNourriture = PRICES.NOURRITURE.KOMBINIS;
+			break;
+		case '3':
+			prixNourriture = PRICES.NOURRITURE.RESTAURANT;
+			break;
+		case '4':
+			prixNourriture = PRICES.NOURRITURE.JUSTE_RESTAURANT;
+			break;
+		case '5':
+			prixNourriture = PRICES.NOURRITURE.HAUT_DE_GAMME;
+			break;
+	}
+
+	$("#prixNourriture").val(prixNourriture);
 	calculSousTotal();
 }
 
 function calculTransport() {
 	const $choix = $('input[type=radio][name=typeTransport]:checked').val();
-	$("#prixTransport").val(PRICES.TRANSPORT[$choix]);
+
+	let prixTransport = 0;
+
+	switch ($choix) {
+		case '1':
+			prixTransport = PRICES.TRANSPORT.MARCHER;
+			break;
+		case '2':
+			prixTransport = PRICES.TRANSPORT.MARCHER_ET_TRANSPORTS;
+			break;
+		case '3':
+			prixTransport = PRICES.TRANSPORT.TRANSPORTS_COMMUN;
+			break;
+		case '4':
+			prixTransport = PRICES.TRANSPORT.LOUER_VOITURE;
+			break;
+		case '5':
+			prixTransport = PRICES.TRANSPORT.UBER_TAXI;
+			break;
+	}
+
+	$("#prixTransport").val(prixTransport);
 	calculSousTotal();
 }
 
 function calculVisit() {
 	const $choix = $('input[type=radio][name=typeVisit]:checked').val();
-	$("#prixVisit").val(PRICES.VISITE[$choix]);
+
+	let prixVisit = 0;
+
+	switch ($choix) {
+		case '1':
+			prixVisit = PRICES.VISITE.GRATUIT;
+			break;
+		case '2':
+			prixVisit = PRICES.VISITE.MOYEN;
+			break;
+		case '3':
+			prixVisit = PRICES.VISITE.CHER;
+			break;
+	}
+
+	$("#prixVisit").val(prixVisit);
 	calculSousTotal();
 }
