@@ -5,6 +5,7 @@ Code source pour [ce site web](http://voyagejapon.ca)
 C'est un site web pour facilité le calcul approximatif d'un voyage au japon selon plusieurs critères.
 
 ## Comment contribuer au projet ?
+
 Si vous aimeriez m'aider et soutenir ce projet, voici comment vous pouvez vous y prendre :
 
 * Vous avez des idée pour amélioré le site web? Vous pouvez [me contacter ici!](mailto:nicolas.meunier@hotmail.ca?subject=Calculateur%20de%20voyage%20au%20Japon%20-%20Contribuer)
