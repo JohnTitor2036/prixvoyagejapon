@@ -2,7 +2,7 @@
 
 Code source pour [ce site web](http://voyagejapon.ca)
 
-C'est un site web pour facilité le calcul approximatif d'un voyage au japon selon plusieurs critères.
+C'est un mini projet personnel pour faciliter le calcul approximatif d'un voyage au japon selon plusieurs critères.
 
 ## Comment contribuer au projet ?
 

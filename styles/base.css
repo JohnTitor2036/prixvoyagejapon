@@ -16,17 +16,35 @@ body, html {
 
 #tableauPrix {
 	font-family: arial, sans-serif;
-	border-collapse: collapse;
-	box-shadow: 0px 0px 6px grey;
+	border-collapse: separate;
+	border-spacing: 0;
 	margin-top: 10px;
 	margin-bottom: 10px;
-	width: 50%;
+	width: 55%;
+	border-radius: 10px;
+	overflow: hidden;
 }
 
 #tableauPrix td, th {
 	border: 1px solid #942626;
 	text-align: left;
 	padding: 8px;
+}
+
+#tableauPrix tr:first-child th:first-child {
+	border-top-left-radius: 10px;
+}
+
+#tableauPrix tr:first-child th:last-child {
+	border-top-right-radius: 10px;
+}
+
+#tableauPrix tr:last-child td:first-child {
+	border-bottom-left-radius: 10px;
+}
+
+#tableauPrix tr:last-child td:last-child {
+	border-bottom-right-radius: 10px;
 }
 
 .slidecontainer {
@@ -161,7 +179,7 @@ h3 {
 	}
 
 	#tableauPrix {
-		width: 80%;
+		width: 85%;
 	}
 
 	#footer_info {
